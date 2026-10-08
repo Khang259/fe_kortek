@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens của AMR Warehouse Operator Console.
+ * App chỉ có dark theme nên token đặt thẳng ở :root, class `.dark` trên <html>
+ * chỉ để bật các biến thể `dark:` mà shadcn/ui sinh ra.
+ */
+:root {
+  --radius: 0.4375rem;
+
+  --background: #0d0e10;
+  --foreground: #eef0f2;
+
+  --card: #141619;
+  --card-foreground: #eef0f2;
+
+  --popover: #15191d;
+  --popover-foreground: #eef0f2;
+
+  --primary: #315d9c;
+  --primary-foreground: #ffffff;
+
+  --secondary: #20242a;
+  --secondary-foreground: #eef0f2;
+
+  --muted: #191c20;
+  --muted-foreground: #8f98a4;
+
+  --accent: #20242a;
+  --accent-foreground: #eef0f2;
+
+  --destructive: #ff6b70;
+  --destructive-foreground: #ffffff;
+
+  --border: #2a2f36;
+  --input: #3a414b;
+  --ring: #73a7ff;
+
+  /* Màu phụ dùng riêng cho nghiệp vụ warehouse */
+  --surface-raised: #191c20;
+  --surface-overlay: #20242a;
+  --faint: #626b76;
+
+  --info: #73a7ff;
+  --info-muted: #1a2d4d;
+  --success: #48d597;
+  --success-muted: #14372c;
+  --warning: #f5bd62;
+  --warning-muted: #44351f;
+  --danger: #ff6b70;
+  --danger-muted: #442326;
+  --purple: #956bd3;
+  --purple-muted: #2f2440;
+  --zone-a: #3d79c6;
+  --zone-b: #956bd3;
+  --map-canvas: #11151a;
+  --camera-feed: #07090b;
+}
+
+@theme inline {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Tailwind mặc định — thiếu token thì rounded-2xl/3xl = var() invalid → không bo góc */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-faint: var(--faint);
+
+  --color-info: var(--info);
+  --color-info-muted: var(--info-muted);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --color-danger: var(--danger);
+  --color-danger-muted: var(--danger-muted);
+  --color-purple: var(--purple);
+  --color-purple-muted: var(--purple-muted);
+  --color-zone-a: var(--zone-a);
+  --color-zone-b: var(--zone-b);
+  --color-map-canvas: var(--map-canvas);
+  --color-camera-feed: var(--camera-feed);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground text-xs antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-ring outline-2 outline-offset-2;
+  }
+}
+
+/* Progress bar đếm ngược — dùng ::before (Sonner dùng ::after khi expand). */
+[data-sonner-toast][data-mounted='true']::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 3px;
+  width: 100%;
+  transform-origin: left center;
+  pointer-events: none;
+  border-radius: 0 0 var(--border-radius, 8px) var(--border-radius, 8px);
+  background: rgba(255, 255, 255, 0.55);
+  animation: toast-progress-shrink var(--toast-duration, 4000ms) linear forwards;
+}
+
+[data-sonner-toast][data-type='success']::before {
+  background: #16a34a;
+}
+
+[data-sonner-toast][data-type='error']::before {
+  background: #dc2626;
+}
+
+[data-sonner-toast][data-type='warning']::before {
+  background: #ca8a04;
+}
+
+[data-sonner-toast][data-type='info']::before {
+  background: #2563eb;
+}
+
+/* Loading / không tự đóng → không hiện thanh. */
+[data-sonner-toast][data-type='loading']::before,
+[data-sonner-toast][data-promise='true']::before {
+  content: none;
+  animation: none;
+}
+
+/* Sonner tạm dừng timer khi hover / expand — pause progress cho khớp. */
+[data-sonner-toaster]:hover [data-sonner-toast]::before,
+[data-sonner-toaster][data-expanded='true'] [data-sonner-toast]::before {
+  animation-play-state: paused;
+}
+
+@keyframes toast-progress-shrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+
+  [data-sonner-toast]::before {
+    animation: none;
+    content: none;
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+  <!-- NÁn xanh kiÃu sandbox BE -->
+  <rect width="960" height="360" fill="#0d3b2e"/>
+  <!-- Nía start -->
+  <rect x="0" y="0" width="480" height="360" fill="#124c3a"/>
+  <rect x="48" y="56" width="384" height="248" fill="none" stroke="#4ade80" stroke-width="3" stroke-dasharray="10 6"/>
+  <circle cx="240" cy="180" r="52" fill="#f59e0b" opacity="0.85"/>
+  <text x="240" y="40" text-anchor="middle" fill="#86efac" font-size="16" font-family="monospace">START · ROI</text>
+  <!-- Nía end -->
+  <rect x="480" y="0" width="480" height="360" fill="#0f3d4a"/>
+  <rect x="528" y="56" width="384" height="248" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="10 6"/>
+  <circle cx="720" cy="180" r="52" fill="#f59e0b" opacity="0.85"/>
+  <text x="720" y="40" text-anchor="middle" fill="#7dd3fc" font-size="16" font-family="monospace">END · ROI</text>
+  <!-- °Ýng ghép ngang -->
+  <line x1="480" y1="0" x2="480" y2="360" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="320" y="318" width="320" height="28" rx="4" fill="#00000099"/>
+  <text x="480" y="337" text-anchor="middle" fill="#cbd5e1" font-size="13" font-family="monospace">MOCK PAIR SNAPSHOT · start|end</text>
+</svg>

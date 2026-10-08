@@ -1,0 +1,62 @@
+import type { AppNotification } from '@/features/notifications/types'
+
+export const notificationFixtures: AppNotification[] = [
+  {
+    id: 'n-1',
+    type: 'camera.offline',
+    title: 'Camera mất kết nối',
+    message: 'Camera 3 timeout sau 2/3 lần thử lại',
+    createdAt: '2024-06-12T14:31:00Z',
+    readAt: null,
+    meta: { cameraId: 3 },
+    snapshotImageUrl: null,
+  },
+  {
+    id: 'n-2',
+    type: 'zone.autostop',
+    title: 'Zone tự dừng',
+    message: '2 camera mất kết nối — hệ thống đã dừng BF2',
+    createdAt: '2024-06-12T14:28:00Z',
+    readAt: null,
+    meta: { zoneId: 'BF2' },
+    snapshotImageUrl: null,
+  },
+  {
+    id: 'n-3',
+    type: 'node.maintenance',
+    title: 'Node vào bảo trì',
+    message: 'start_10000070 — các pair liên quan đã bị chặn',
+    createdAt: '2024-06-12T13:45:00Z',
+    readAt: '2024-06-12T13:50:00Z',
+    meta: { nodeId: 'start_10000070' },
+    snapshotImageUrl: null,
+  },
+  {
+    id: 'n-4',
+    type: 'dispatch.failed',
+    title: 'Lệnh thất bại',
+    message: 'ICS thất bại: start_10000060 → end_10000761',
+    createdAt: '2024-06-12T14:28:55Z',
+    readAt: null,
+    meta: {
+      startNodeId: 'start_10000060',
+      endNodeId: 'end_10000761',
+      orderId: 'ORD-8841',
+    },
+    snapshotImageUrl: null,
+  },
+  {
+    id: 'n-5',
+    type: 'dispatch.success',
+    title: 'Dispatch xong',
+    message: 'Đã lưu snapshot cho ORD-9001',
+    createdAt: '2024-06-12T14:35:00Z',
+    readAt: null,
+    meta: {
+      startNodeId: 'start_10000060',
+      endNodeId: 'end_10000760',
+      orderId: 'ORD-9001',
+    },
+    snapshotImageUrl: '/api/v1/snapshots/get_image?file=order1_demo.jpg',
+  },
+]

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+  <rect width="960" height="360" fill="#1a1520"/>
+  <rect x="0" y="0" width="480" height="360" fill="#221a2e"/>
+  <rect x="64" y="72" width="352" height="216" fill="none" stroke="#c084fc" stroke-width="3"/>
+  <rect x="180" y="140" width="120" height="80" fill="#fbbf24" opacity="0.9" rx="6"/>
+  <text x="240" y="48" text-anchor="middle" fill="#e9d5ff" font-size="16" font-family="monospace">START</text>
+  <rect x="480" y="0" width="480" height="360" fill="#152028"/>
+  <rect x="544" y="72" width="352" height="216" fill="none" stroke="#34d399" stroke-width="3"/>
+  <rect x="660" y="140" width="120" height="80" fill="#fbbf24" opacity="0.9" rx="6"/>
+  <text x="720" y="48" text-anchor="middle" fill="#a7f3d0" font-size="16" font-family="monospace">END</text>
+  <line x1="480" y1="0" x2="480" y2="360" stroke="#94a3b8" stroke-width="2"/>
+  <text x="480" y="340" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="monospace">MOCK PAIR B</text>
+</svg>

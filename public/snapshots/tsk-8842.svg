@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#0f1419"/>
+  <rect x="120" y="80" width="400" height="300" fill="#1a2430" stroke="#3d8bfd" stroke-width="3"/>
+  <circle cx="320" cy="230" r="40" fill="#f59e0b" opacity="0.8"/>
+  <text x="320" y="420" text-anchor="middle" fill="#94a3b8" font-size="14" font-family="monospace">DISPATCH TRACE · ST’EN</text>
+</svg>
