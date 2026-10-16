@@ -15,6 +15,15 @@ export const formatClockWithSeconds = (isoDate: string) =>
 export const formatLogTimestamp = (isoDate: string) =>
   dayjs(isoDate).format('DD/MM HH:mm:ss.SSS')
 
+/** 14:32:08 12:06:24 — map version createdAt (ISO → hh:mm:ss dd:mm:yy). */
+export const formatDateTimeHmsDmy = (isoDate: string) => {
+  const parsed = dayjs(isoDate)
+  if (!parsed.isValid()) {
+    return isoDate
+  }
+  return parsed.format('HH:mm:ss DD:MM:YY')
+}
+
 /** "3 minutes ago" */
 export const formatRelative = (isoDate: string) => dayjs(isoDate).fromNow()
 

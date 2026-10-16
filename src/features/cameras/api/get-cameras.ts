@@ -27,7 +27,17 @@ function normalizeCamera(item: Camera): Camera {
 
 const getCameras = async () => {
   const items = await fetchList<Camera>('/cameras/get_cameras', cameraFixtures)
-  return items.map(normalizeCamera)
+  const cameras = items.map(normalizeCamera)
+  console.log(
+    '[get_cameras]',
+    cameras.map((camera) => ({
+      cameraId: camera.cameraId,
+      name: camera.name,
+      zone: camera.zone,
+      observedNodeIds: camera.observedNodeIds,
+    })),
+  )
+  return cameras
 }
 
 export const camerasQueryOptions = queryOptions({

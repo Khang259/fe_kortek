@@ -43,16 +43,16 @@ export const compressFixture: CompressPayload = {
   ],
   nodeArr: [
     // type 0 — ẩn
-    [15_000, 15_000, 0, 'waypoint', 'hidden-qr', 'hidden-qr', 'AE5', 'Cam-1', ''],
+    [15_000, 15_000, 0, 'waypoint', 'hidden-qr', 'hidden-qr', 'X', 'Cam9', ''],
     // type 1 — hiện; `name` = tên thật (không S-01 tạm)
-    [20_000, 20_000, 1, 'start', 'QR-S01', 'QR-S01', 'AE5', 'Cam-1', 'QR-E01'],
-    [80_000, 20_000, 1, 'end', 'QR-E01', 'QR-E01', 'AE5', 'Cam-1', 'QR-S01'],
-    [20_000, 60_000, 1, 'start', 'QR-S02', 'QR-S02', 'AE5', 'Cam-2', 'QR-E02'],
-    [80_000, 60_000, 1, 'end', 'QR-E02', 'QR-E02', 'AE5', 'Cam-2', 'QR-S02'],
-    [50_000, 40_000, 1, 'waypoint', 'QR-W01', 'QR-W01', 'BF2', 'Cam-4', 'QR-S04'],
+    [20_000, 20_000, 1, 'start', 'A1', 'A1', 'X', 'Cam9', 'Line1'],
+    [80_000, 20_000, 1, 'end', 'Line1', 'Line1', 'X', 'Cam15', 'A1'],
+    [20_000, 60_000, 1, 'start', 'B1', 'B1', 'X', 'Cam9', 'Line1'],
+    [80_000, 60_000, 1, 'end', 'Line2', 'Line2', 'X', 'Cam16', 'C1'],
+    [50_000, 40_000, 1, 'waypoint', 'C1', 'C1', 'X', 'Cam8', 'Line2'],
     // Camera markers
-    [35_000, 25_000, 1, 'camera', '', 'Cam-1', 'AE5', '', ''],
-    [65_000, 55_000, 1, 'camera', '', 'Cam-3', 'AE5', '', ''],
+    [35_000, 25_000, 1, 'camera', '', 'Cam9', 'X', '', ''],
+    [65_000, 55_000, 1, 'camera', '', 'Cam8', 'X', '', ''],
   ],
   lineKeys: [
     'from',
@@ -64,11 +64,11 @@ export const compressFixture: CompressPayload = {
     'path',
   ],
   lineArr: [
-    ['QR-S01', 'QR-E01', 600, 600, 0, 0, [[20_000, 20_000], [80_000, 20_000]]],
-    ['QR-S02', 'QR-E02', 600, 600, 0, 0, [[20_000, 60_000], [80_000, 60_000]]],
+    ['A1', 'Line1', 600, 600, 0, 0, [[20_000, 20_000], [80_000, 20_000]]],
+    ['B1', 'Line2', 600, 600, 0, 0, [[20_000, 60_000], [80_000, 60_000]]],
     [
-      'QR-S01',
-      'QR-W01',
+      'A1',
+      'C1',
       600,
       600,
       0,
@@ -79,8 +79,8 @@ export const compressFixture: CompressPayload = {
       ],
     ],
     [
-      'QR-W01',
-      'QR-E02',
+      'C1',
+      'Line2',
       600,
       600,
       0,

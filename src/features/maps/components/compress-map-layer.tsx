@@ -116,6 +116,13 @@ export function CompressMapLayer({ compress }: CompressMapLayerProps) {
    * Xóa khi xác nhận data khớp.
    */
   useEffect(() => {
+    const startNodes = warehouseNodes.filter((node) =>
+      node.nodeId.startsWith('start_'),
+    )
+    const endNodes = warehouseNodes.filter((node) =>
+      node.nodeId.startsWith('end_'),
+    )
+
     const compressBusiness = visibleNodes.filter(
       (node) => !isCompressCameraName(node.name),
     )
@@ -132,8 +139,37 @@ export function CompressMapLayer({ compress }: CompressMapLayerProps) {
     const lodBusiness = lodNodes.filter(
       (node) => !isCompressCameraName(node.name),
     )
+
     console.groupCollapsed(
-      `[map-join] compress=${visibleNodes.length} mongo=${warehouseNodes.length} matched=${matched.length} unmatched=${unmatched.length} lodBusiness=${lodBusiness.length} zoom=${zoom}`,
+      `[map-join] compress=${visibleNodes.length} mongo=${warehouseNodes.length} start=${startNodes.length} end=${endNodes.length} cameras=${cameras.length} matched=${matched.length} unmatched=${unmatched.length} lodBusiness=${lodBusiness.length} zoom=${zoom}`,
+    )
+    console.log(
+      '[map-join] start_ nodes',
+      startNodes.map((node) => ({
+        nodeId: node.nodeId,
+        name: node.name,
+        cameraId: node.cameraId,
+        zoneId: node.zoneId,
+      })),
+    )
+    console.log(
+      '[map-join] end_ nodes',
+      endNodes.map((node) => ({
+        nodeId: node.nodeId,
+        name: node.name,
+        cameraId: node.cameraId,
+        zoneId: node.zoneId,
+      })),
+    )
+    console.log(
+      '[map-join] cameras (API)',
+      cameras.map((camera) => ({
+        cameraId: camera.cameraId,
+        name: camera.name,
+        zone: camera.zone,
+        observedNodeIds: camera.observedNodeIds,
+        status: camera.status,
+      })),
     )
     console.table(
       compressBusiness.map((node) => ({
@@ -145,26 +181,20 @@ export function CompressMapLayer({ compress }: CompressMapLayerProps) {
         joined: Boolean(findWarehouseByCompressName(node.name, nodesByNodeId)),
       })),
     )
-    console.table(
-      warehouseNodes.map((node) => ({
-        source: 'mongo',
-        nodeId: node.nodeId,
-        id: node.id,
-        name: node.name,
-        kind: node.kind,
-      })),
+    console.log(
+      '[map-join] compress cameras',
+      compressCameras.map((node) => node.name),
     )
-    console.log('[map-join] compress cameras', compressCameras.map((n) => n.name))
     console.log(
       '[map-join] unmatched compress.name (không vẽ)',
-      unmatched.map((n) => n.name),
+      unmatched.map((node) => node.name),
     )
     console.log(
       '[map-join] matched compress.name',
-      matched.map((n) => n.name),
+      matched.map((node) => node.name),
     )
     console.groupEnd()
-  }, [visibleNodes, lodNodes, warehouseNodes, nodesByNodeId, zoom])
+  }, [visibleNodes, lodNodes, warehouseNodes, nodesByNodeId, cameras, zoom])
 
   /** Tọa độ màn hình — tooltip portal + fixed, không dính scale của map. */
   const toScreenPoint = (event: React.MouseEvent) => ({

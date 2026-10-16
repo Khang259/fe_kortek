@@ -9,6 +9,7 @@ import { useImportMap } from '@/features/maps/api/import-map'
 import { useMapVersions } from '@/features/maps/api/list-map-versions'
 import { useSetActiveMap } from '@/features/maps/api/set-active-map'
 import { useHasPermission } from '@/hooks/use-has-permission'
+import { formatDateTimeHmsDmy } from '@/utils'
 
 /**
  * Thanh quản lý version map: chọn bản, restore, tải zip, import (map.write).
@@ -32,7 +33,7 @@ export function MapVersionControls() {
   const versions = data?.items ?? []
   const activeId = data?.activeVersionId ?? ''
   const options = versions.map((item) => ({
-    label: `${item.isActive ? '● ' : ''}${item.originalFilename}`,
+    label: `${item.isActive ? '● ' : ''}${item.originalFilename} · ${formatDateTimeHmsDmy(item.createdAt)}`,
     value: item.versionId,
   }))
 
@@ -55,7 +56,7 @@ export function MapVersionControls() {
             if (versionId === activeId) return
             setActive.mutate(versionId)
           }}
-          className="h-7 min-w-36 text-[10px]"
+          className="h-7 min-w-56 text-[10px]"
         />
       ) : (
         <span className="text-[10px] text-faint">

@@ -36,7 +36,15 @@ const getNodes = async (zoneId?: string) => {
       : nodeFixtures,
     zoneId ? { zoneId } : undefined,
   )
-  return items.map(normalizeNode)
+  const nodes = items.map(normalizeNode)
+  const startNodes = nodes.filter((node) => node.nodeId.startsWith('start_'))
+  const endNodes = nodes.filter((node) => node.nodeId.startsWith('end_'))
+  console.log('[get_nodes] total', nodes.length, {
+    start_: startNodes.map((node) => node.nodeId),
+    end_: endNodes.map((node) => node.nodeId),
+    zoneId: zoneId ?? 'all',
+  })
+  return nodes
 }
 
 export const nodesQueryOptions = (zoneId?: string) =>

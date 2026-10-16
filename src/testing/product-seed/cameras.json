@@ -1,0 +1,117 @@
+[
+  {
+    "cameraId": 8,
+    "name": "Cam8",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.118:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "start_10000068",
+      "start_10000070",
+      "start_10000072",
+      "start_10000069",
+      "start_10000071",
+      "start_10000073"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 9,
+    "name": "Cam9",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.119:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "start_10000004",
+      "start_10000066",
+      "start_10000007",
+      "start_10000077",
+      "start_10000081",
+      "start_10000010",
+      "start_10000067",
+      "start_10000013",
+      "start_10000078",
+      "start_10000082"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 10,
+    "name": "Cam10",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.120:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "start_10000079",
+      "start_10000083",
+      "start_10000087",
+      "start_10000080",
+      "start_10000084",
+      "start_10000088"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 13,
+    "name": "Cam13",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.123:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "start_10000091",
+      "start_10000095",
+      "start_10000099",
+      "start_10000092",
+      "start_10000096",
+      "start_10000100"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 14,
+    "name": "Cam14",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.124:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "start_10000085",
+      "start_10000089",
+      "start_10000093",
+      "start_10000097",
+      "start_10000086",
+      "start_10000090",
+      "start_10000094",
+      "start_10000098"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 15,
+    "name": "Cam15",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.125:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "end_10000105"
+    ],
+    "enabled": true
+  },
+  {
+    "cameraId": 16,
+    "name": "Cam16",
+    "rtspUrl": "rtsp://admin:Kortek2026#@192.168.50.126:554/Streaming/Channels/102",
+    "zone": "X",
+    "format": "H264",
+    "resolution": "640x480",
+    "observedNodeIds": [
+      "end_10000106"
+    ],
+    "enabled": true
+  }
+]

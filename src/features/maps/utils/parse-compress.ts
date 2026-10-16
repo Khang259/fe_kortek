@@ -35,7 +35,7 @@ function firstString(
 }
 
 /** Tên compress dạng `Cam-1`, `Cam-12`… */
-const CAM_NAME_RE = /^Cam-(\d+)$/i
+const CAM_NAME_RE = /^Cam(\d+)$/i
 
 export function isCompressCameraName(name: string) {
   return CAM_NAME_RE.test(name.trim())
@@ -59,7 +59,7 @@ export function isCompressNodeVisible(node: CompressNode) {
   if (isCompressCameraName(node.name)) {
     return true
   }
-  return node.type === 1
+  return node.type === 12  // Nếu không hiện chỉnh sửa phần này để phù hợp theo mapEditor của người triển khai
 }
 
 function isNumericFlag(value: unknown) {

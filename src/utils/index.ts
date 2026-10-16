@@ -1,6 +1,7 @@
 export {
   formatClock,
   formatClockWithSeconds,
+  formatDateTimeHmsDmy,
   formatLogTimestamp,
   formatPercent,
   formatRatio,

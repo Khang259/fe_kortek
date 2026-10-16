@@ -1,0 +1,16 @@
+[
+  {
+    "zoneId": "X",
+    "name": "Zone X",
+    "enabled": true,
+    "nodeCount": 38,
+    "cameraCount": 7
+  },
+  {
+    "zoneId": "Y",
+    "name": "Zone Y",
+    "enabled": true,
+    "nodeCount": 0,
+    "cameraCount": 0
+  }
+]

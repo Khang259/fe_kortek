@@ -1,0 +1,344 @@
+[
+  {
+    "nodeId": "start_10000004",
+    "name": "A1",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000066",
+    "name": "A2",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000007",
+    "name": "A3",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 3,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000077",
+    "name": "A4",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 4,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000081",
+    "name": "A5",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 5,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000085",
+    "name": "A6",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 6,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000089",
+    "name": "A7",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 7,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000093",
+    "name": "A8",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 8,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000097",
+    "name": "A9",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 9,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000010",
+    "name": "B1",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 10,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000067",
+    "name": "B2",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 11,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000013",
+    "name": "B3",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 12,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000078",
+    "name": "B4",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 13,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000082",
+    "name": "B5",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 9,
+    "priority": 14,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000086",
+    "name": "B6",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 15,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000090",
+    "name": "B7",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 16,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000094",
+    "name": "B8",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 17,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000098",
+    "name": "B9",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 14,
+    "priority": 18,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000068",
+    "name": "C1",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 19,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000070",
+    "name": "C2",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 20,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000072",
+    "name": "C3",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 21,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000079",
+    "name": "C4",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 22,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000083",
+    "name": "C5",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 23,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000087",
+    "name": "C6",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 24,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000091",
+    "name": "C7",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 25,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000095",
+    "name": "C8",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 26,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000099",
+    "name": "C9",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 27,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000069",
+    "name": "D1",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 28,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000071",
+    "name": "D2",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 29,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000073",
+    "name": "D3",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 8,
+    "priority": 30,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000080",
+    "name": "D4",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 31,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000084",
+    "name": "D5",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 32,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000088",
+    "name": "D6",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 10,
+    "priority": 33,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000092",
+    "name": "D7",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 34,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000096",
+    "name": "D8",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 35,
+    "enabled": true
+  },
+  {
+    "nodeId": "start_10000100",
+    "name": "D9",
+    "kind": "start",
+    "zoneId": "X",
+    "cameraId": 13,
+    "priority": 36,
+    "enabled": true
+  },
+  {
+    "nodeId": "end_10000105",
+    "name": "Line1",
+    "kind": "end",
+    "zoneId": "X",
+    "cameraId": 15,
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "nodeId": "end_10000106",
+    "name": "Line2",
+    "kind": "end",
+    "zoneId": "X",
+    "cameraId": 16,
+    "priority": 2,
+    "enabled": true
+  }
+]
