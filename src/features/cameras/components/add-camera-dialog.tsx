@@ -77,7 +77,7 @@ export function AddCameraDialog({ open, onClose }: AddCameraDialogProps) {
           {form.newStartIds.length > 0 ? (
             <div className="grid gap-1.5 rounded-md border px-2 py-2">
               <span className="text-[10px] text-muted-foreground">
-                New start priority (unique within Zone) *
+                New start: priority (unique in Zone) + colId *
               </span>
               {form.newStartIds.map((id) => (
                 <label
@@ -99,7 +99,21 @@ export function AddCameraDialog({ open, onClose }: AddCameraDialogProps) {
                       }))
                     }
                     aria-label={`Priority ${id}`}
-                    className="h-7 w-20 font-mono text-[10px]"
+                    title="Priority"
+                    className="h-7 w-16 font-mono text-[10px]"
+                  />
+                  <Input
+                    value={form.startColIds[id] ?? ''}
+                    onChange={(event) =>
+                      form.setStartColIds((prev) => ({
+                        ...prev,
+                        [id]: event.target.value,
+                      }))
+                    }
+                    aria-label={`Col ${id}`}
+                    title="colId (column/aisle)"
+                    placeholder="A"
+                    className="h-7 w-14 font-mono text-[10px] uppercase"
                   />
                 </label>
               ))}
@@ -112,6 +126,9 @@ export function AddCameraDialog({ open, onClose }: AddCameraDialogProps) {
           ) : null}
           {form.priorityError ? (
             <p className="text-[10px] text-danger">{form.priorityError}</p>
+          ) : null}
+          {form.colIdError ? (
+            <p className="text-[10px] text-danger">{form.colIdError}</p>
           ) : null}
           <div className="flex justify-end gap-2 pt-1">
             <Button variant="outline" size="sm" onClick={onClose}>

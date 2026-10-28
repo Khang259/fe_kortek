@@ -29,6 +29,8 @@ export function createObservedNode(input: {
   cameraId: number
   zone: string
   priority: number
+  /** Bắt buộc với start; end bỏ qua. */
+  colId?: string | null
   name?: string | null
 }): WarehouseNode {
   const kind = inferKindFromNodeId(input.nodeId)
@@ -49,6 +51,7 @@ export function createObservedNode(input: {
     zoneId: input.zone,
     cameraId: input.cameraId,
     priority: input.priority,
+    colId: kind === 'start' ? (input.colId?.trim() || null) : null,
     enabled: true,
     position: null,
     state: 'idle',
@@ -60,7 +63,7 @@ export function createObservedNode(input: {
   return node
 }
 
-/** Map lỗi validateNewStartPriorities → ApiError (409 nếu trùng priority). */
+/** Map lỗi validate start priority/colId → ApiError (409 nếu trùng priority). */
 export function toStartPriorityApiError(message: unknown): ApiError {
   return {
     status:

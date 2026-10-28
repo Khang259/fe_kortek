@@ -24,6 +24,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 1,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -35,6 +36,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 2,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -46,6 +48,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 3,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -57,6 +60,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 4,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -68,6 +72,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 5,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -79,6 +84,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 6,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -90,6 +96,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 7,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -101,6 +108,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 8,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -112,6 +120,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 9,
+    colId: 'A',
     lock: unlocked(),
   },
   {
@@ -123,6 +132,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 10,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -134,6 +144,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 11,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -145,6 +156,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 12,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -156,6 +168,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 13,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -167,6 +180,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 9,
     priority: 14,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -178,6 +192,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 15,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -189,6 +204,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 16,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -200,6 +216,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 17,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -211,6 +228,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 14,
     priority: 18,
+    colId: 'B',
     lock: unlocked(),
   },
   {
@@ -222,6 +240,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 19,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -233,6 +252,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 20,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -244,6 +264,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 21,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -255,6 +276,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 22,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -266,6 +288,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 23,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -277,6 +300,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 24,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -288,6 +312,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 25,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -299,6 +324,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 26,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -310,6 +336,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 27,
+    colId: 'C',
     lock: unlocked(),
   },
   {
@@ -321,6 +348,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 28,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -332,6 +360,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 29,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -343,6 +372,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 8,
     priority: 30,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -354,6 +384,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 31,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -365,6 +396,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 32,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -376,6 +408,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 10,
     priority: 33,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -387,6 +420,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 34,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -398,6 +432,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 35,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -409,6 +444,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 13,
     priority: 36,
+    colId: 'D',
     lock: unlocked(),
   },
   {
@@ -420,6 +456,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 15,
     priority: 1,
+    colId: null,
     lock: unlocked(),
   },
   {
@@ -431,6 +468,7 @@ export const nodeFixtures: WarehouseNode[] = [
     zoneId: 'X',
     cameraId: 16,
     priority: 2,
+    colId: null,
     lock: unlocked(),
   },
 ]

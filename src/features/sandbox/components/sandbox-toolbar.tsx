@@ -13,9 +13,9 @@ import { useInferenceStore } from '@/features/zones/stores/inference-store'
 import { useSystemPowerStore } from '@/features/zones/stores/system-power-store'
 
 /**
- * Flow: start_all → start-scan → (isReady) → confirm-dispatch.
- * Sau batch inference vẫn chạy; chỉ cổng đóng.
- * @see docs/fe-api-dispatch-batch.md
+ * Flow: start-cameras → (isReady) → dispatch.
+ * start-scan giữ để resume sau pause.
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 export function SandboxToolbar() {
   const isReady = useInferenceStore((state) => state.isReady)
@@ -33,21 +33,8 @@ export function SandboxToolbar() {
     confirmDispatch.isPending ||
     cancelBatch.isPending
 
-  const handleStartAll = () => {
+  const handleStartCameras = () => {
     toggleZone.mutate({ zoneId: null, isRunning: true })
-  }
-
-  const handleStartScan = () => {
-    void (async () => {
-      try {
-        if (!fleetActive) {
-          await toggleZone.mutateAsync({ zoneId: null, isRunning: true })
-        }
-        await startScan.mutateAsync()
-      } catch {
-        /* toast MutationCache */
-      }
-    })()
   }
 
   return (
@@ -65,31 +52,33 @@ export function SandboxToolbar() {
         variant="outline"
         size="sm"
         disabled={busy || fleetActive}
-        title="POST /system/start_all — arm cameras; inference stays paused"
-        onClick={handleStartAll}
+        title="POST /system/start-cameras — cameras + inference ON"
+        onClick={handleStartCameras}
       >
         <Zap />
-        start_all
+        start-cameras
       </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        disabled={busy || isReady}
-        title="POST /runtime/start-scan — start inference (does not send ICS)"
-        onClick={handleStartScan}
-      >
-        <Play />
-        start-scan
-      </Button>
+      {fleetActive && !isReady ? (
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={busy}
+          title="POST /runtime/start-scan — resume inference after Pause"
+          onClick={() => startScan.mutate()}
+        >
+          <Play />
+          start-scan
+        </Button>
+      ) : null}
       <Button
         variant="outline"
         size="sm"
         disabled={busy || !isReady || batchActive}
-        title="POST /runtime/confirm-dispatch — capture batch, send ICS"
+        title="POST /runtime/dispatch — capture batch, send ICS"
         onClick={() => confirmDispatch.mutate()}
       >
         <CircleCheck />
-        confirm-dispatch
+        dispatch
       </Button>
       {batchActive && hasStuck ? (
         <Button
@@ -103,8 +92,8 @@ export function SandboxToolbar() {
         </Button>
       ) : null}
       <p className="w-full text-[10px] text-faint md:w-auto md:flex-1 md:text-right">
-        start_all ≠ scan. Stuck batch → cancel-batch (keeps inference). After batch
-        only the gate closes.
+        start-cameras = cameras + scan. Dispatch theo colId ASC rồi priority.
+        Stuck → cancel-batch.
       </p>
     </div>
   )

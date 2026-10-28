@@ -2,7 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { env } from '@/config/env'
 import { cameraKeys } from '@/features/cameras/api/get-cameras'
-import type { CameraRoi, RoiBox } from '@/features/cameras/types'
+import {
+  ROI_REF_HEIGHT,
+  ROI_REF_WIDTH,
+  type CameraRoi,
+  type RoiBox,
+} from '@/features/cameras/types'
 import { isValidRoiBox } from '@/features/cameras/utils/roi-box'
 import { dispatchKeys } from '@/features/dispatch/api/get-active-tasks'
 import { assertInferencePaused } from '@/features/system/hooks/use-config-write-gate'
@@ -59,8 +64,8 @@ async function createRoi(input: {
       label: meta.label,
       kind: meta.kind,
       box: input.box,
-      refWidth: 640,
-      refHeight: 480,
+      refWidth: ROI_REF_WIDTH,
+      refHeight: ROI_REF_HEIGHT,
     }
     const index = cameraRoiFixtures.findIndex((roi) => roi.id === id)
     if (index >= 0) {
@@ -134,7 +139,7 @@ async function updateRoi(input: UpdateRoiInput): Promise<UpdateRoiListResponse> 
     if (!isValidRoiBox(item.box)) {
       const error: ApiError = {
         status: 400,
-        message: `items[${index}]: box vượt khung 640×480`,
+        message: `items[${index}]: box vượt khung ${ROI_REF_WIDTH}×${ROI_REF_HEIGHT}`,
       }
       throw error
     }

@@ -9,6 +9,7 @@ import {
   toStartPriorityApiError,
 } from '@/features/cameras/utils/camera-node-helpers'
 import { nodeKeys } from '@/features/nodes/api/get-nodes'
+import { validateNewStartColIds } from '@/features/nodes/utils/node-col'
 import {
   isStartNodeId,
   validateNewStartPriorities,
@@ -36,6 +37,8 @@ export interface UpdateCameraInput {
   observedNodeIds?: string[]
   /** Bắt buộc khi observedNodeIds tạo mới `start_*`. */
   nodePriorities?: Record<string, number>
+  /** Bắt buộc khi observedNodeIds tạo mới `start_*`. */
+  nodeColIds?: Record<string, string>
 }
 
 export interface UpdateCameraResult extends Camera {
@@ -87,6 +90,7 @@ function syncObservedNodes(
   camera: Camera,
   nextIds: string[],
   nodePriorities: Record<string, number>,
+  nodeColIds: Record<string, string>,
 ): {
   assigned: number
   created: number
@@ -109,6 +113,7 @@ function syncObservedNodes(
       zoneId: camera.zone,
       existingNodes: nodeFixtures,
     })
+    validateNewStartColIds({ newStartIds, nodeColIds })
   } catch (message) {
     throw toStartPriorityApiError(message)
   }
@@ -124,6 +129,7 @@ function syncObservedNodes(
         cameraId: camera.cameraId,
         zone: camera.zone,
         priority,
+        colId: isStartNodeId(nodeId) ? nodeColIds[nodeId] : null,
         name: nodeId,
       })
       created += 1
@@ -182,6 +188,7 @@ async function updateCamera(
   const zone = input.zone !== undefined ? normalizeZone(input.zone) : undefined
   const observedNodeIds = input.observedNodeIds
   const nodePriorities = input.nodePriorities ?? {}
+  const nodeColIds = input.nodeColIds ?? {}
 
   const hasField =
     name !== undefined ||
@@ -244,7 +251,12 @@ async function updateCamera(
       })
     }
     if (observedNodeIds !== undefined) {
-      const sync = syncObservedNodes(camera, observedNodeIds, nodePriorities)
+      const sync = syncObservedNodes(
+        camera,
+        observedNodeIds,
+        nodePriorities,
+        nodeColIds,
+      )
       observedAssigned = sync.assigned
       observedCreated = sync.created
       observedRemoved = sync.removed
@@ -270,7 +282,11 @@ async function updateCamera(
 
   const body: Record<
     string,
-    string | number | string[] | Record<string, number>
+    | string
+    | number
+    | string[]
+    | Record<string, number>
+    | Record<string, string>
   > = {
     cameraId: input.cameraId,
   }
@@ -288,6 +304,9 @@ async function updateCamera(
   }
   if (Object.keys(nodePriorities).length > 0) {
     body.nodePriorities = nodePriorities
+  }
+  if (Object.keys(nodeColIds).length > 0) {
+    body.nodeColIds = nodeColIds
   }
 
   const { data } = await apiClient.patch<UpdateCameraResult>(

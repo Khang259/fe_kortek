@@ -6,7 +6,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 1,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000066",
@@ -15,7 +16,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 2,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000007",
@@ -24,7 +26,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 3,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000077",
@@ -33,7 +36,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 4,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000081",
@@ -42,7 +46,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 5,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000085",
@@ -51,7 +56,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 6,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000089",
@@ -60,7 +66,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 7,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000093",
@@ -69,7 +76,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 8,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000097",
@@ -78,7 +86,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 9,
-    "enabled": true
+    "enabled": true,
+    "colId": "A"
   },
   {
     "nodeId": "start_10000010",
@@ -87,7 +96,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 10,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000067",
@@ -96,7 +106,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 11,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000013",
@@ -105,7 +116,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 12,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000078",
@@ -114,7 +126,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 13,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000082",
@@ -123,7 +136,8 @@
     "zoneId": "X",
     "cameraId": 9,
     "priority": 14,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000086",
@@ -132,7 +146,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 15,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000090",
@@ -141,7 +156,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 16,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000094",
@@ -150,7 +166,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 17,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000098",
@@ -159,7 +176,8 @@
     "zoneId": "X",
     "cameraId": 14,
     "priority": 18,
-    "enabled": true
+    "enabled": true,
+    "colId": "B"
   },
   {
     "nodeId": "start_10000068",
@@ -168,7 +186,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 19,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000070",
@@ -177,7 +196,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 20,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000072",
@@ -186,7 +206,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 21,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000079",
@@ -195,7 +216,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 22,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000083",
@@ -204,7 +226,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 23,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000087",
@@ -213,7 +236,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 24,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000091",
@@ -222,7 +246,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 25,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000095",
@@ -231,7 +256,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 26,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000099",
@@ -240,7 +266,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 27,
-    "enabled": true
+    "enabled": true,
+    "colId": "C"
   },
   {
     "nodeId": "start_10000069",
@@ -249,7 +276,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 28,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000071",
@@ -258,7 +286,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 29,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000073",
@@ -267,7 +296,8 @@
     "zoneId": "X",
     "cameraId": 8,
     "priority": 30,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000080",
@@ -276,7 +306,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 31,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000084",
@@ -285,7 +316,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 32,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000088",
@@ -294,7 +326,8 @@
     "zoneId": "X",
     "cameraId": 10,
     "priority": 33,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000092",
@@ -303,7 +336,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 34,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000096",
@@ -312,7 +346,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 35,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "start_10000100",
@@ -321,7 +356,8 @@
     "zoneId": "X",
     "cameraId": 13,
     "priority": 36,
-    "enabled": true
+    "enabled": true,
+    "colId": "D"
   },
   {
     "nodeId": "end_10000105",
@@ -330,7 +366,8 @@
     "zoneId": "X",
     "cameraId": 15,
     "priority": 1,
-    "enabled": true
+    "enabled": true,
+    "colId": null
   },
   {
     "nodeId": "end_10000106",
@@ -339,6 +376,7 @@
     "zoneId": "X",
     "cameraId": 16,
     "priority": 2,
-    "enabled": true
+    "enabled": true,
+    "colId": null
   }
 ]

@@ -10,6 +10,7 @@ export {
   usePauseScan,
   useStartScan,
   useConfirmDispatch,
+  useDispatch,
   useCancelBatch,
   useReloadRuntime,
 } from './api/runtime'
@@ -20,11 +21,14 @@ export type {
 export type {
   BatchStopReason,
   CancelBatchResult,
+  ColStatusItem,
   ConfirmDispatchResult,
+  DispatchResult,
   NextPair,
   PendingBatch,
   PendingPairsResponse,
   ReadyStart,
+  StartCamerasResult,
   WaitingForItem,
 } from './types'
 export { SystemConfigPage } from './components/system-config-page'

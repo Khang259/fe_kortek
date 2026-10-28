@@ -1,5 +1,6 @@
 import type { RuntimeStatus } from '@/features/system/api/runtime-keys'
 import type {
+  ColStatusItem,
   PendingBatch,
   PendingPairsResponse,
   ReadyStart,
@@ -50,7 +51,8 @@ export function parseReady(data: Record<string, unknown>): boolean | null {
   const direct =
     coerceBoolean(data.ready) ??
     coerceBoolean(data.inferenceReady) ??
-    coerceBoolean(data.inference_ready)
+    coerceBoolean(data.inference_ready) ??
+    coerceBoolean(data.scanning)
   if (direct !== null) {
     return direct
   }
@@ -98,12 +100,20 @@ export function normalizeStatus(
   }
 }
 
+function asStringList(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return value.filter((n): n is string => typeof n === 'string')
+}
+
 export function emptyBatch(): PendingBatch {
   return {
     active: false,
     size: 0,
     nodes: [],
     dispatched: [],
+    skipped: [],
     remaining: 0,
     stopReason: null,
     newNodes: [],
@@ -115,8 +125,19 @@ function mapReadyStart(item: Record<string, unknown>): ReadyStart {
     nodeId: String(item.nodeId ?? item.node_id ?? ''),
     priority: Number(item.priority ?? 0),
     zoneId: String(item.zoneId ?? item.zone_id ?? ''),
+    colId: String(item.colId ?? item.col_id ?? ''),
     inBatch: Boolean(item.inBatch ?? item.in_batch),
     dispatched: Boolean(item.dispatched),
+    skipped: Boolean(item.skipped),
+  }
+}
+
+function mapColStatus(item: Record<string, unknown>): ColStatusItem {
+  return {
+    zoneId: String(item.zoneId ?? item.zone_id ?? ''),
+    colId: String(item.colId ?? item.col_id ?? ''),
+    headNodeId: String(item.headNodeId ?? item.head_node_id ?? ''),
+    headInBatch: Boolean(item.headInBatch ?? item.head_in_batch),
   }
 }
 
@@ -136,17 +157,10 @@ export function normalizePendingPairs(
       ? stopReasonRaw
       : null
 
-  const nodes = Array.isArray(batchRaw?.nodes)
-    ? batchRaw.nodes.filter((n): n is string => typeof n === 'string')
-    : []
-  const dispatched = Array.isArray(batchRaw?.dispatched)
-    ? batchRaw.dispatched.filter((n): n is string => typeof n === 'string')
-    : []
-  const newNodes = Array.isArray(batchRaw?.newNodes)
-    ? batchRaw.newNodes.filter((n): n is string => typeof n === 'string')
-    : Array.isArray(batchRaw?.new_nodes)
-      ? batchRaw.new_nodes.filter((n): n is string => typeof n === 'string')
-      : []
+  const nodes = asStringList(batchRaw?.nodes)
+  const dispatched = asStringList(batchRaw?.dispatched)
+  const skipped = asStringList(batchRaw?.skipped)
+  const newNodes = asStringList(batchRaw?.newNodes ?? batchRaw?.new_nodes)
 
   const readyStartsRaw = Array.isArray(data.readyStarts)
     ? data.readyStarts
@@ -194,18 +208,40 @@ export function normalizePendingPairs(
       (item): item is Record<string, unknown> =>
         !!item && typeof item === 'object',
     )
-    .map((item) => ({
-      zoneId: String(item.zoneId ?? item.zone_id ?? ''),
-      nodeId: String(item.nodeId ?? item.node_id ?? ''),
-    }))
+    .map((item) => {
+      const colRaw = item.colId ?? item.col_id
+      const reasonRaw = item.reason
+      return {
+        zoneId: String(item.zoneId ?? item.zone_id ?? ''),
+        nodeId: String(item.nodeId ?? item.node_id ?? ''),
+        ...(typeof colRaw === 'string' && colRaw
+          ? { colId: colRaw }
+          : {}),
+        ...(typeof reasonRaw === 'string' && reasonRaw
+          ? { reason: reasonRaw }
+          : {}),
+      }
+    })
     .filter((item) => item.zoneId && item.nodeId)
 
-  const stuckRaw = Array.isArray(data.stuckNodes)
-    ? data.stuckNodes
-    : Array.isArray(data.stuck_nodes)
-      ? data.stuck_nodes
+  const stuckNodes = asStringList(data.stuckNodes ?? data.stuck_nodes)
+
+  const colStatusRaw = Array.isArray(data.colStatus)
+    ? data.colStatus
+    : Array.isArray(data.col_status)
+      ? data.col_status
       : []
-  const stuckNodes = stuckRaw.filter((n): n is string => typeof n === 'string')
+  const colStatus: ColStatusItem[] = colStatusRaw
+    .filter(
+      (item): item is Record<string, unknown> =>
+        !!item && typeof item === 'object',
+    )
+    .map(mapColStatus)
+    .filter((item) => item.zoneId && item.colId && item.headNodeId)
+
+  const newNodesOutsideBatch = asStringList(
+    data.newNodesOutsideBatch ?? data.new_nodes_outside_batch,
+  )
 
   return {
     runtimeReady: Boolean(data.runtimeReady ?? data.runtime_ready ?? true),
@@ -214,6 +250,7 @@ export function normalizePendingPairs(
       size,
       nodes,
       dispatched,
+      skipped,
       remaining,
       stopReason,
       newNodes,
@@ -222,5 +259,7 @@ export function normalizePendingPairs(
     nextPairs,
     waitingFor,
     stuckNodes,
+    colStatus,
+    newNodesOutsideBatch,
   }
 }

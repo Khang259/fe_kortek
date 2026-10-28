@@ -1,6 +1,6 @@
 /**
  * Runtime API barrel — giữ path import cũ.
- * @see docs/fe-api-dispatch-batch.md
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 
 export {
@@ -17,16 +17,20 @@ export {
 export {
   useCancelBatch,
   useConfirmDispatch,
+  useDispatch,
   usePendingPairs,
 } from './runtime-batch'
 
 export type {
   BatchStopReason,
   CancelBatchResult,
+  ColStatusItem,
   ConfirmDispatchResult,
+  DispatchResult,
   NextPair,
   PendingBatch,
   PendingPairsResponse,
   ReadyStart,
+  StartCamerasResult,
   WaitingForItem,
 } from '@/features/system/types'

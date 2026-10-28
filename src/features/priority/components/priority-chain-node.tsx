@@ -13,6 +13,7 @@ interface PriorityChainNodeProps {
   isEditing: boolean
   draft?: PriorityDraft
   onChangePriority: (nodeId: string, priority: number) => void
+  onChangeColId: (nodeId: string, colId: string) => void
 }
 
 export function PriorityChainNode({
@@ -20,22 +21,45 @@ export function PriorityChainNode({
   isEditing,
   draft,
   onChangePriority,
+  onChangeColId,
 }: PriorityChainNodeProps) {
   const priority = draft?.priority ?? node.priority
+  const colId = draft?.colId ?? node.colId ?? ''
   const displayName = getNodeDisplayName(node)
 
   return (
     <article
       className={cn(
-        'priority-chain-card group relative isolate w-36 shrink-0 overflow-hidden rounded-2xl border border-border bg-card',
+        'priority-chain-card group relative isolate w-40 shrink-0 overflow-hidden rounded-2xl border border-border bg-card',
         'shadow-[0_8px_20px_-14px_rgba(0,0,0,0.55)] transition duration-200',
         'hover:-translate-y-0.5 hover:border-info hover:shadow-[0_12px_24px_-14px_rgba(115,167,255,0.25)]',
       )}
     >
-      <div className="grid grid-cols-[40%_60%] divide-x divide-border">
-        <div className="flex flex-col gap-0.5 px-2 py-2.5">
+      <div className="grid grid-cols-[32%_28%_40%] divide-x divide-border">
+        <div className="flex flex-col gap-0.5 px-1.5 py-2.5">
           <span className="text-[8px] font-medium tracking-wider text-faint uppercase">
-            Priority
+            Col
+          </span>
+          {isEditing ? (
+            <Input
+              value={colId}
+              onChange={(event) =>
+                onChangeColId(node.id, event.target.value.toUpperCase())
+              }
+              className="h-auto border-0 bg-transparent p-0 font-mono text-base font-bold text-foreground uppercase shadow-none focus-visible:ring-0"
+              aria-label={`Col for ${displayName}`}
+              maxLength={4}
+            />
+          ) : (
+            <span className="font-mono text-base leading-none font-bold text-foreground">
+              {colId || '—'}
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-0.5 px-1.5 py-2.5">
+          <span className="text-[8px] font-medium tracking-wider text-faint uppercase">
+            P
           </span>
           {isEditing ? (
             <Input

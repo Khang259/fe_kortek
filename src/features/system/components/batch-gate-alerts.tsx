@@ -11,7 +11,7 @@ interface BatchGateAlertsProps {
 
 /**
  * Cảnh báo waitingFor / stuckNodes + nút Huỷ đợt (cancel-batch).
- * @see docs/fe-api-dispatch-batch.md
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 export function BatchGateAlerts({
   waitingFor,
@@ -28,11 +28,13 @@ export function BatchGateAlerts({
     <div className="flex flex-col gap-2">
       {waitingFor.map((item) => (
         <p
-          key={`${item.zoneId}-${item.nodeId}`}
+          key={`${item.zoneId}-${item.colId ?? ''}-${item.nodeId}`}
           role="status"
           className="rounded-md border border-info/40 bg-info/10 px-3 py-2 text-[11px] text-info"
         >
-          Zone {item.zoneId} waiting for {item.nodeId}
+          Zone {item.zoneId}
+          {item.colId ? ` · col ${item.colId}` : ''} waiting for {item.nodeId}
+          {item.reason ? ` (${item.reason})` : ''}
         </p>
       ))}
 

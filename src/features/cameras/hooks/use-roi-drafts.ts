@@ -10,6 +10,12 @@ const toDrafts = (rois: CameraRoi[]): RoiDraft[] =>
     box: roi.box,
   }))
 
+/** Key ổn định cho draft mới — không dùng index (lệch khi xoá giữa list).
+ *  Fallback vì randomUUID chỉ có trên secure context (HTTPS/localhost), không có trên HTTP+IP LAN. */
+const newDraftKey = () =>
+  globalThis.crypto?.randomUUID?.() ??
+  `roi-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
+
 /** Quản lý danh sách ROI đang chỉnh của một camera. */
 export function useRoiDrafts(existingRois: CameraRoi[]) {
   const [drafts, setDrafts] = useState<RoiDraft[]>(() => toDrafts(existingRois))
@@ -24,8 +30,7 @@ export function useRoiDrafts(existingRois: CameraRoi[]) {
   const add = (box: RoiBox) => {
     setDrafts((current) => [
       ...current,
-      /** crypto.randomUUID vì index làm key sẽ lệch khi xoá phần tử giữa danh sách. */
-      { key: crypto.randomUUID(), id: null, nodeId: '', box },
+      { key: newDraftKey(), id: null, nodeId: '', box },
     ])
   }
 

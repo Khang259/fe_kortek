@@ -36,6 +36,10 @@ export function PriorityPage() {
     patchDraft(nodeId, { priority })
   }
 
+  const onChangeColId = (nodeId: string, colId: string) => {
+    patchDraft(nodeId, { colId })
+  }
+
   const leftTitle = primaryZone
     ? `${primaryZone.name} (${primaryZone.id})`
     : 'Primary zone'
@@ -47,6 +51,7 @@ export function PriorityPage() {
       isEditing={isEditing}
       drafts={drafts}
       onChangePriority={onChangePriority}
+      onChangeColId={onChangeColId}
       isPending={isPending}
       isError={isError}
       emptyMessage="No start nodes in this zone"
@@ -60,6 +65,7 @@ export function PriorityPage() {
       isEditing={isEditing}
       drafts={drafts}
       onChangePriority={onChangePriority}
+      onChangeColId={onChangeColId}
       isPending={isPending}
       isError={isError}
       emptyMessage="No start nodes in other zones"
@@ -70,7 +76,7 @@ export function PriorityPage() {
     <div>
       <SectionHeader
         title="Priority chain"
-        description="Left = first zone, right = remaining zones. Edit priority only — rename in Settings → Cameras."
+        description="Left = first zone, right = remaining zones. Edit colId + priority — rename in Settings → Cameras. Dispatch sorts col ASC then priority ASC."
         action={
           canWrite ? (
             <div className="flex flex-wrap items-center gap-2">

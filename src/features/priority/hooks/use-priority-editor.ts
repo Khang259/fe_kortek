@@ -4,6 +4,10 @@ import { toast } from 'sonner'
 import { PERMISSIONS } from '@/config/permissions'
 import { useUpdateNode } from '@/features/nodes'
 import { useNodes } from '@/features/nodes/api/get-nodes'
+import {
+  compareStartsByColThenPriority,
+  isValidColId,
+} from '@/features/nodes/utils/node-col'
 import { usePriorityEditorStore } from '@/features/priority/stores/priority-editor-store'
 import { useConfigWriteGate } from '@/features/system/hooks/use-config-write-gate'
 import { useZones } from '@/features/zones'
@@ -11,11 +15,7 @@ import { useHasPermission } from '@/hooks/use-has-permission'
 import type { WarehouseNode } from '@/types'
 
 function sortStarts(nodes: WarehouseNode[]) {
-  return [...nodes].sort((a, b) => {
-    if (a.zoneId !== b.zoneId) return a.zoneId.localeCompare(b.zoneId)
-    if (a.priority !== b.priority) return a.priority - b.priority
-    return a.id.localeCompare(b.id)
-  })
+  return [...nodes].sort(compareStartsByColThenPriority)
 }
 
 /** Editor priority: trái = zone đầu, phải = các zone còn lại → PATCH update_node. */
@@ -103,7 +103,11 @@ export function usePriorityEditor() {
     }
 
     const byId = new Map(nodes.map((node) => [node.id, node]))
-    const patches: { nodeId: string; priority: number }[] = []
+    const patches: {
+      nodeId: string
+      priority?: number
+      colId?: string
+    }[] = []
 
     for (const [nodeId, draft] of Object.entries(drafts)) {
       const node = byId.get(nodeId)
@@ -112,8 +116,23 @@ export function usePriorityEditor() {
         toast.error(`priority must be >= 0 (${nodeId})`)
         return
       }
-      if (draft.priority === node.priority) continue
-      patches.push({ nodeId, priority: draft.priority })
+      if (!isValidColId(draft.colId)) {
+        toast.error(`colId required (${nodeId})`)
+        return
+      }
+      const nextCol = draft.colId.trim()
+      const patch: { nodeId: string; priority?: number; colId?: string } = {
+        nodeId,
+      }
+      if (draft.priority !== node.priority) {
+        patch.priority = draft.priority
+      }
+      if (nextCol !== (node.colId ?? '')) {
+        patch.colId = nextCol
+      }
+      if (patch.priority !== undefined || patch.colId !== undefined) {
+        patches.push(patch)
+      }
     }
 
     if (patches.length === 0) {

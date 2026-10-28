@@ -61,7 +61,7 @@ export function SandboxPage() {
           role="status"
           className="mb-4 rounded-md border border-warning/40 bg-warning/10 px-3 py-2 text-[11px] text-warning"
         >
-          Sandbox runtime not running (HTTP 503). Run start_all → start-scan;
+          Sandbox runtime not running (HTTP 503). Run start-cameras → dispatch;
           this page will refresh automatically.
         </p>
       ) : null}

@@ -12,14 +12,14 @@ import {
   useRuntimeStatus,
   useStartScan,
 } from '@/features/system/api/runtime'
-import { useToggleZone } from '@/features/zones/api/toggle-zone'
 import { useInferenceStore } from '@/features/zones/stores/inference-store'
 import { useSystemPowerStore } from '@/features/zones/stores/system-power-store'
 import { useHasPermission } from '@/hooks/use-has-permission'
 
 /**
- * Runtime: start-scan / confirm-dispatch / cancel-batch / pause-scan / reload.
- * @see docs/fe-api-dispatch-batch.md
+ * Runtime: Resume scan / Dispatch / cancel-batch / Pause / reload.
+ * Bật hệ thống dùng AllZonesPowerButton (`start-cameras`) — không trùng nút.
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 export function InferenceControlButtons() {
   const canControlSystem = useHasPermission(PERMISSIONS.systemControl)
@@ -33,7 +33,6 @@ export function InferenceControlButtons() {
   const cancelBatch = useCancelBatch()
   const pauseScan = usePauseScan()
   const reload = useReloadRuntime()
-  const toggleZone = useToggleZone()
 
   if (!canControlSystem) {
     return null
@@ -46,21 +45,10 @@ export function InferenceControlButtons() {
     confirmDispatch.isPending ||
     cancelBatch.isPending ||
     pauseScan.isPending ||
-    reload.isPending ||
-    toggleZone.isPending
+    reload.isPending
 
-  const handleStartScan = () => {
-    void (async () => {
-      try {
-        if (!fleetActive) {
-          await toggleZone.mutateAsync({ zoneId: null, isRunning: true })
-        }
-        await startScan.mutateAsync()
-      } catch {
-        /* toast qua MutationCache */
-      }
-    })()
-  }
+  /** Chỉ resume sau Pause — start hệ thống = nút Start cameras bên cạnh. */
+  const canResume = fleetActive && !isReady
 
   return (
     <div className="flex items-center gap-1.5">
@@ -70,25 +58,27 @@ export function InferenceControlButtons() {
       {batchActive ? (
         <StatusBadge tone="info">Batch dispatching</StatusBadge>
       ) : null}
-      <Button
-        variant="ghost"
-        size="sm"
-        disabled={busy || isReady}
-        title="start_all (if needed) → POST /runtime/start-scan"
-        onClick={handleStartScan}
-      >
-        <Play />
-        Start scan
-      </Button>
+      {canResume ? (
+        <Button
+          variant="ghost"
+          size="sm"
+          disabled={busy}
+          title="POST /runtime/start-scan — resume inference after Pause"
+          onClick={() => startScan.mutate()}
+        >
+          <Play />
+          Resume scan
+        </Button>
+      ) : null}
       <Button
         variant="ghost"
         size="sm"
         disabled={busy || !isReady || batchActive}
-        title="POST /runtime/confirm-dispatch — snapshot isReady batch, send to ICS"
+        title="POST /runtime/dispatch — snapshot isReady batch, send to ICS"
         onClick={() => confirmDispatch.mutate()}
       >
         <CircleCheck />
-        Confirm dispatch
+        Dispatch
       </Button>
       {batchActive && hasStuck ? (
         <Button

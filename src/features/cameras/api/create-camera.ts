@@ -10,6 +10,7 @@ import {
 } from '@/features/cameras/utils/camera-node-helpers'
 import { dispatchKeys } from '@/features/dispatch/api/get-active-tasks'
 import { nodeKeys } from '@/features/nodes/api/get-nodes'
+import { validateNewStartColIds } from '@/features/nodes/utils/node-col'
 import {
   isStartNodeId,
   validateNewStartPriorities,
@@ -28,6 +29,8 @@ export interface CreateCameraInput {
   observedNodeIds?: string[]
   /** Bắt buộc khi tạo mới ít nhất một `start_*`. */
   nodePriorities?: Record<string, number>
+  /** Bắt buộc khi tạo mới ít nhất một `start_*` — mã cột trong zone. */
+  nodeColIds?: Record<string, string>
 }
 
 export interface CreateCameraResult extends Camera {
@@ -76,6 +79,9 @@ function buildPayload(input: CreateCameraInput): CreateCameraInput {
   if (input.nodePriorities && Object.keys(input.nodePriorities).length > 0) {
     payload.nodePriorities = input.nodePriorities
   }
+  if (input.nodeColIds && Object.keys(input.nodeColIds).length > 0) {
+    payload.nodeColIds = input.nodeColIds
+  }
   return payload
 }
 
@@ -99,8 +105,7 @@ function normalizeCreateResult(data: CreateCameraResult): CreateCameraResult {
 
 /**
  * `POST /cameras/create_camera`
- * @see docs/fe-api-create-camera.md
- * @see docs/fe-api-start-priority.md
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 async function createCamera(
   input: CreateCameraInput,
@@ -126,6 +131,7 @@ async function createCamera(
     const zone = payload.zone ?? ''
     const observedNodeIds = payload.observedNodeIds ?? []
     const nodePriorities = payload.nodePriorities ?? {}
+    const nodeColIds = payload.nodeColIds ?? {}
     let observedCreated = 0
     let observedAssigned = 0
 
@@ -141,6 +147,7 @@ async function createCamera(
         zoneId: zone,
         existingNodes: nodeFixtures,
       })
+      validateNewStartColIds({ newStartIds, nodeColIds })
     } catch (message) {
       throw toStartPriorityApiError(message)
     }
@@ -156,6 +163,7 @@ async function createCamera(
           cameraId,
           zone,
           priority,
+          colId: isStartNodeId(nodeId) ? nodeColIds[nodeId] : null,
           name: null,
         })
         observedCreated += 1

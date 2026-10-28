@@ -9,7 +9,8 @@ import { useSystemPowerStore } from '@/features/zones/stores/system-power-store'
 import { useHasPermission } from '@/hooks/use-has-permission'
 
 /**
- * Start/stop camera toàn nhà máy (`start_all` / `stop_all`).
+ * Start/stop camera toàn nhà máy (`start-cameras` / `stop_all`).
+ * start-cameras = camera ON + inference ON (contract cols).
  * Trạng thái nút = công tắc (`isRunning` / fleetActive) — không phải live stream.
  */
 export function AllZonesPowerButton() {
@@ -38,7 +39,11 @@ export function AllZonesPowerButton() {
       variant="ghost"
       size="sm"
       disabled={toggleZone.isPending}
-      title="Camera power only — use start-scan / Pause for inference"
+      title={
+        fleetActive
+          ? 'POST /system/stop_all'
+          : 'POST /system/start-cameras — cameras + inference ON'
+      }
       onClick={() =>
         toggleZone.mutate({ zoneId: null, isRunning: !fleetActive })
       }

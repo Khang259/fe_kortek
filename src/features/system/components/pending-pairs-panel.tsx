@@ -13,7 +13,7 @@ interface PendingPairsPanelProps {
 }
 
 /**
- * Preview batch: readyStarts + nextPairs + banner stopReason / stuck.
+ * Preview batch: readyStarts + nextPairs + banner stopReason / stuck / cols.
  * Poll GET /runtime/get_pending_pairs (~1.5s).
  */
 export function PendingPairsPanel({
@@ -45,6 +45,7 @@ export function PendingPairsPanel({
           <BatchStopBanner
             stopReason={batch.stopReason}
             newNodes={batch.newNodes}
+            newNodesOutsideBatch={data?.newNodesOutsideBatch}
           />
         ) : null}
         <BatchGateAlerts
@@ -52,6 +53,19 @@ export function PendingPairsPanel({
           stuckNodes={data?.stuckNodes ?? []}
           batchActive={batch?.active ?? false}
         />
+        {(data?.colStatus.length ?? 0) > 0 ? (
+          <p className="text-[10px] text-muted-foreground">
+            Col heads:{' '}
+            {data!.colStatus
+              .map(
+                (item) =>
+                  `${item.zoneId}/${item.colId}→${item.headNodeId}${
+                    item.headInBatch ? '✓' : ''
+                  }`,
+              )
+              .join(' · ')}
+          </p>
+        ) : null}
       </div>
 
       <div className="overflow-hidden rounded-lg border bg-card">

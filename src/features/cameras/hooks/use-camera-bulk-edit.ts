@@ -12,6 +12,7 @@ import {
 } from '@/features/cameras/stores/camera-bulk-edit-store'
 import type { Camera } from '@/features/cameras/types'
 import { useNodes } from '@/features/nodes'
+import { validateNewStartColIds } from '@/features/nodes/utils/node-col'
 import {
   isStartNodeId,
   validateNewStartPriorities,
@@ -128,6 +129,10 @@ export function useCameraBulkEdit() {
           nodePriorities: patch.nodePriorities,
           zoneId: zone,
           existingNodes: nodes,
+        })
+        validateNewStartColIds({
+          newStartIds,
+          nodeColIds: patch.nodeColIds,
         })
       } catch (message) {
         toast.error(String(message))

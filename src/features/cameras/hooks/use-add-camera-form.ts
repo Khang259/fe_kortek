@@ -3,6 +3,7 @@ import { toast } from 'sonner'
 
 import { useCreateCamera } from '@/features/cameras/api/create-camera'
 import { useNodes } from '@/features/nodes'
+import { isValidColId } from '@/features/nodes/utils/node-col'
 import {
   isStartNodeId,
   suggestNextStartPriority,
@@ -26,6 +27,7 @@ export function useAddCameraForm(onClose: () => void) {
   const [startPriorities, setStartPriorities] = useState<
     Record<string, string>
   >({})
+  const [startColIds, setStartColIds] = useState<Record<string, string>>({})
 
   const zoneOptions = useMemo(
     () => [
@@ -90,6 +92,24 @@ export function useAddCameraForm(onClose: () => void) {
     })
   }, [newStartIds, zone, nodes])
 
+  /** Gợi ý colId mặc định "A" cho start mới; prune khi bỏ id. */
+  useEffect(() => {
+    setStartColIds((prev) => {
+      const next = { ...prev }
+      newStartIds.forEach((id) => {
+        if (next[id] === undefined || next[id] === '') {
+          next[id] = 'A'
+        }
+      })
+      Object.keys(next).forEach((id) => {
+        if (!newStartIds.includes(id)) {
+          delete next[id]
+        }
+      })
+      return next
+    })
+  }, [newStartIds])
+
   const needsZoneForNodes = observedNodeIds.length > 0 && zone === ZONE_NONE
 
   const priorityError = useMemo(() => {
@@ -117,12 +137,26 @@ export function useAddCameraForm(onClose: () => void) {
     return null
   }, [newStartIds, startPriorities, zone, nodes])
 
+  const colIdError = useMemo(() => {
+    if (newStartIds.length === 0) {
+      return null
+    }
+    for (const id of newStartIds) {
+      const raw = startColIds[id] ?? ''
+      if (!isValidColId(raw)) {
+        return `Start ${id} needs colId (e.g. A, B, C)`
+      }
+    }
+    return null
+  }, [newStartIds, startColIds])
+
   const canSubmit =
     canWriteConfig &&
     name.trim() !== '' &&
     rtspUrl.trim().startsWith('rtsp://') &&
     !needsZoneForNodes &&
-    !priorityError
+    !priorityError &&
+    !colIdError
 
   const nodePlaceholder =
     nodes.find((node) => zone === ZONE_NONE || node.zoneId === zone)?.id ??
@@ -134,6 +168,7 @@ export function useAddCameraForm(onClose: () => void) {
     setZone(ZONE_NONE)
     setNodeIdDraft('')
     setStartPriorities({})
+    setStartColIds({})
   }
 
   const handleSubmit = () => {
@@ -142,8 +177,10 @@ export function useAddCameraForm(onClose: () => void) {
     }
 
     const nodePriorities: Record<string, number> = {}
+    const nodeColIds: Record<string, string> = {}
     newStartIds.forEach((id) => {
       nodePriorities[id] = Number(startPriorities[id])
+      nodeColIds[id] = startColIds[id].trim()
     })
 
     createCamera.mutate(
@@ -155,6 +192,7 @@ export function useAddCameraForm(onClose: () => void) {
         ...(Object.keys(nodePriorities).length > 0
           ? { nodePriorities }
           : {}),
+        ...(Object.keys(nodeColIds).length > 0 ? { nodeColIds } : {}),
       },
       {
         onSuccess: (result) => {
@@ -186,8 +224,11 @@ export function useAddCameraForm(onClose: () => void) {
     newStartIds,
     startPriorities,
     setStartPriorities,
+    startColIds,
+    setStartColIds,
     needsZoneForNodes,
     priorityError,
+    colIdError,
     canSubmit,
     isPending: createCamera.isPending,
     handleSubmit,

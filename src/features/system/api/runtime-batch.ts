@@ -17,15 +17,17 @@ import { apiClient } from '@/lib/axios'
 import { mockRequest } from '@/testing/mock-request'
 
 /**
- * `POST /runtime/confirm-dispatch` — chụp batch isReady, mở cổng gửi ICS.
+ * `POST /runtime/dispatch` — chụp batch isReady, mở cổng gửi ICS.
+ * Alias logic cũ `confirm-dispatch` (deprecated).
  * Quyền: `system.control`
+ * @see docs/FE_CONTRACT_COLS_API.md
  */
 async function confirmDispatch(): Promise<ConfirmDispatchResult> {
   if (env.useMockApi) {
     return mockRequest(mockConfirmDispatch(), 200)
   }
   const { data } = await apiClient.post<ConfirmDispatchResult>(
-    '/runtime/confirm-dispatch',
+    '/runtime/dispatch',
   )
   return {
     message: data.message ?? 'Dispatch confirmed',
@@ -92,6 +94,9 @@ export function useConfirmDispatch() {
     },
   })
 }
+
+/** Alias contract — cùng mutation → POST /runtime/dispatch. */
+export const useDispatch = useConfirmDispatch
 
 export function useCancelBatch() {
   const queryClient = useQueryClient()

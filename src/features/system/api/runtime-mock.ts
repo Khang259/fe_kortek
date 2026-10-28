@@ -15,17 +15,22 @@ let mockReadyStarts: ReadyStart[] = [
     nodeId: 'start_9000001',
     priority: 1,
     zoneId: 'SBA',
+    colId: 'A',
     inBatch: false,
     dispatched: false,
+    skipped: false,
   },
   {
     nodeId: 'start_9000011',
     priority: 1,
     zoneId: 'SBB',
+    colId: 'A',
     inBatch: false,
     dispatched: false,
+    skipped: false,
   },
 ]
+let mockNewNodesOutsideBatch: string[] = []
 
 export function getMockReady() {
   return mockReady
@@ -38,13 +43,16 @@ export function buildMockPendingPairs(): PendingPairsResponse {
       ...mockBatch,
       nodes: [...mockBatch.nodes],
       dispatched: [...mockBatch.dispatched],
+      skipped: [...mockBatch.skipped],
       newNodes: [...mockBatch.newNodes],
     },
     readyStarts: mockReadyStarts.map((item) => ({ ...item })),
     nextPairs: mockReadyStarts
       .filter(
         (item) =>
-          !item.dispatched && (mockBatch.active ? item.inBatch : true),
+          !item.dispatched &&
+          !item.skipped &&
+          (mockBatch.active ? item.inBatch : true),
       )
       .slice(0, 1)
       .map((item) => ({
@@ -53,6 +61,13 @@ export function buildMockPendingPairs(): PendingPairsResponse {
       })),
     waitingFor: [],
     stuckNodes: [],
+    colStatus: mockReadyStarts.map((item) => ({
+      zoneId: item.zoneId,
+      colId: item.colId,
+      headNodeId: item.nodeId,
+      headInBatch: item.inBatch,
+    })),
+    newNodesOutsideBatch: [...mockNewNodesOutsideBatch],
   }
 }
 
@@ -61,7 +76,7 @@ function assertMockCamerasEnabled() {
   if (!hasEnabled) {
     const error: ApiError = {
       status: 400,
-      message: 'Chưa có camera enabled — gọi start_all trước',
+      message: 'Chưa có camera enabled — gọi start-cameras trước',
     }
     throw error
   }
@@ -70,10 +85,12 @@ function assertMockCamerasEnabled() {
 export function mockPauseScan() {
   mockReady = false
   mockBatch = emptyBatch()
+  mockNewNodesOutsideBatch = []
   mockReadyStarts = mockReadyStarts.map((item) => ({
     ...item,
     inBatch: false,
     dispatched: false,
+    skipped: false,
   }))
 }
 
@@ -86,7 +103,7 @@ export function mockConfirmDispatch(): ConfirmDispatchResult {
   if (!mockReady) {
     const error: ApiError = {
       status: 409,
-      message: 'Inference đang pause — gọi start-scan trước',
+      message: 'Inference đang pause — gọi start-cameras / start-scan trước',
     }
     throw error
   }
@@ -98,7 +115,9 @@ export function mockConfirmDispatch(): ConfirmDispatchResult {
     }
     throw error
   }
-  const ready = mockReadyStarts.filter((item) => !item.dispatched)
+  const ready = mockReadyStarts.filter(
+    (item) => !item.dispatched && !item.skipped,
+  )
   if (ready.length === 0) {
     const error: ApiError = {
       status: 409,
@@ -112,14 +131,17 @@ export function mockConfirmDispatch(): ConfirmDispatchResult {
     size: batchNodes.length,
     nodes: batchNodes,
     dispatched: [],
+    skipped: [],
     remaining: batchNodes.length,
     stopReason: null,
     newNodes: [],
   }
+  mockNewNodesOutsideBatch = []
   mockReadyStarts = mockReadyStarts.map((item) => ({
     ...item,
     inBatch: batchNodes.includes(item.nodeId),
     dispatched: false,
+    skipped: false,
   }))
   return {
     message: 'Dispatch confirmed',

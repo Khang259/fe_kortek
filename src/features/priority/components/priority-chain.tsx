@@ -11,18 +11,20 @@ interface PriorityChainProps {
   isEditing: boolean
   drafts: Record<string, PriorityDraft>
   onChangePriority: (nodeId: string, priority: number) => void
+  onChangeColId: (nodeId: string, colId: string) => void
   isPending: boolean
   isError: boolean
   emptyMessage?: string
 }
 
-/** Chuỗi start — chỉ sửa priority (không filter / add / remove). */
+/** Chuỗi start — sửa colId + priority (không filter / add / remove). */
 export function PriorityChain({
   title,
   nodes,
   isEditing,
   drafts,
   onChangePriority,
+  onChangeColId,
   isPending,
   isError,
   emptyMessage = 'No start nodes',
@@ -45,6 +47,7 @@ export function PriorityChain({
                 isEditing={isEditing}
                 draft={drafts[node.id]}
                 onChangePriority={onChangePriority}
+                onChangeColId={onChangeColId}
               />
               {index < nodes.length - 1 ? (
                 <ChevronRight

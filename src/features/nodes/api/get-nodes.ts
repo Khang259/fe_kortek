@@ -1,6 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
 
 import { fetchList } from '@/lib/api-request'
+import { normalizeColId } from '@/features/nodes/utils/node-col'
 import { isNodeLocked, normalizeNodeLock } from '@/features/nodes/utils/node-lock'
 import { nodeFixtures } from '@/testing/fixtures/nodes'
 import type { WarehouseNode } from '@/types'
@@ -14,7 +15,15 @@ export const nodeKeys = {
 /** Bổ sung field FE-only / alias khi backend chưa trả đủ. */
 function normalizeNode(item: WarehouseNode): WarehouseNode {
   const id = item.id ?? item.nodeId
-  const raw = item as WarehouseNode & { commandLock?: unknown }
+  const raw = item as WarehouseNode & {
+    commandLock?: unknown
+    col_id?: unknown
+  }
+  const kind = item.kind
+  const colId =
+    kind === 'end'
+      ? null
+      : normalizeColId(raw.colId ?? raw.col_id)
   return {
     ...item,
     id,
@@ -22,6 +31,7 @@ function normalizeNode(item: WarehouseNode): WarehouseNode {
     name: item.name ?? null,
     label: item.label?.trim() || '',
     state: item.state ?? 'idle',
+    colId,
     lock: normalizeNodeLock(raw.lock ?? raw.commandLock),
     position: item.position ?? null,
     maintenanceReason: item.maintenanceReason ?? null,

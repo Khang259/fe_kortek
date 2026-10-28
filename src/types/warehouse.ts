@@ -42,6 +42,11 @@ export interface WarehouseNode {
   zoneId: ZoneId
   cameraId: number | null
   priority: number
+  /**
+   * Cột/aisle trong zone — bắt buộc với start; end không có.
+   * Sort lexicographic: `"A" < "B" < "C"`.
+   */
+  colId: string | null
   enabled: boolean
   /**
    * Toạ độ % trên map. API hiện luôn null → sơ đồ có thể trống.

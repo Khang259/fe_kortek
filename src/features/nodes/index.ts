@@ -25,6 +25,12 @@ export type {
 } from './types/runtime'
 export { getNodeDisplayName } from './utils/node-display-name'
 export {
+  compareStartsByColThenPriority,
+  isValidColId,
+  normalizeColId,
+  validateNewStartColIds,
+} from './utils/node-col'
+export {
   formatStartPriorityLabel,
   isStartNodeId,
   parseNodePrioritiesText,

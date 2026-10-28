@@ -24,20 +24,28 @@ export function ReadyStartsTable({ items }: ReadyStartsTableProps) {
           <tr>
             <th className="px-3 py-1.5 font-medium">Node</th>
             <th className="px-3 py-1.5 font-medium">Zone</th>
+            <th className="px-3 py-1.5 font-medium">Col</th>
             <th className="px-3 py-1.5 font-medium">P</th>
             <th className="px-3 py-1.5 font-medium">Status</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item) => (
-            <tr key={item.nodeId} className="border-b border-border/60 last:border-0">
+            <tr
+              key={item.nodeId}
+              className="border-b border-border/60 last:border-0"
+            >
               <td className="px-3 py-1.5 font-mono">{item.nodeId}</td>
               <td className="px-3 py-1.5">{item.zoneId}</td>
+              <td className="px-3 py-1.5 font-mono">{item.colId || '—'}</td>
               <td className="px-3 py-1.5">{item.priority}</td>
               <td className="px-3 py-1.5">
                 <span className="inline-flex flex-wrap gap-1">
                   {item.inBatch ? (
                     <StatusBadge tone="info">inBatch</StatusBadge>
+                  ) : null}
+                  {item.skipped ? (
+                    <StatusBadge tone="warning">skipped</StatusBadge>
                   ) : null}
                   {item.dispatched ? (
                     <StatusBadge tone="success">dispatched</StatusBadge>

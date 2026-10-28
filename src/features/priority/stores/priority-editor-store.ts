@@ -18,7 +18,10 @@ export const usePriorityEditorStore = create<PriorityEditorState>((set) => ({
     set({
       isEditing: true,
       drafts: Object.fromEntries(
-        nodes.map((node) => [node.id, { priority: node.priority }]),
+        nodes.map((node) => [
+          node.id,
+          { priority: node.priority, colId: node.colId ?? '' },
+        ]),
       ),
     }),
   exitEdit: () => set({ isEditing: false, drafts: {} }),
